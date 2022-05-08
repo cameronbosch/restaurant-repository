@@ -1,2 +1,2 @@
-# pizza-repo
+# restaurant-repository
 Systems Intern Technical Challenge
