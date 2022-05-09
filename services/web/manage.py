@@ -1,9 +1,10 @@
 from flask.cli import FlaskGroup
-
+from sqlalchemy import create_engine
 from project import app, db
 import psycopg2
 import pandas as pds
 
+DATABASE_URL = "$DATABASE_URL"
 
 cli = FlaskGroup(app)
 
@@ -18,7 +19,8 @@ def create_db():
 @cli.command("seed_db")
 def seed_db():
     df = pds.read_csv("restaurants.csv")
-    df.to_sql("restaurants", 'postgresql://postgresuser:poster@localhost/restaurantdb')
+    engine = create_engine(DATABASE_URL)
+    df.to_sql("restaurants", engine, schema="restaurantdb")
     db.session.add()
     db.session.commit()
 
