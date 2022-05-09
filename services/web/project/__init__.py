@@ -20,7 +20,7 @@ app.config.from_object("project.config.Config")
 db = SQLAlchemy(app)
 
 
-class Restaurants(db.Model):
+class Restaurant(db.Model):
     __tablename__ = "restaurants"
 
     id = db.Column(db.Integer, primary_key=True)

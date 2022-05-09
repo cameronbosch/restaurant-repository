@@ -1,6 +1,8 @@
 from flask.cli import FlaskGroup
 
 from project import app, db
+import psycopg2
+import pandas as pds
 
 
 cli = FlaskGroup(app)
@@ -15,7 +17,9 @@ def create_db():
 
 @cli.command("seed_db")
 def seed_db():
-    # db.session.add(User(email="michael@mherman.org"))
+    df = pds.read_csv("restaurants.csv")
+    df.to_sql("restaurants", 'postgresql://postgresuser:poster@localhost/restaurantdb')
+    db.session.add()
     db.session.commit()
 
 
